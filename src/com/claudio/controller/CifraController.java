@@ -15,7 +15,7 @@ public class CifraController extends MainController{
 	
 	
 	public CifraController() {
-		super("main");
+		super("cifras");
 		setTitlePage("Cifras");
 		// TODO Auto-generated constructor stub
 	}
@@ -28,7 +28,10 @@ public class CifraController extends MainController{
 		setAttribute("author", author);
 	}//fim de setTitle
 
-	
+	public void novaCifra(){
+		setTitlePage("Cifras - Nova Cifra");
+		view = "novacifra";
+	}//fim de novaCifra(Chama formulario de nova cifra)
 	
 	public void novaCifra(String name, String author, String letter) throws SQLException{
 		
@@ -41,7 +44,7 @@ public class CifraController extends MainController{
 		result += "<input type='submit'>";
 		result += "</form>";
 		
-		view = "novacifra";
+		view = "editcifra";
 		setAttribute("letter", result);
 	}//fim de novaCifra
 	

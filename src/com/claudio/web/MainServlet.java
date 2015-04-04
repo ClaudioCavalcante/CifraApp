@@ -1,3 +1,4 @@
+
 package com.claudio.web;
 
 import java.io.IOException;
@@ -47,8 +48,19 @@ public class MainServlet extends HttpServlet{
 		
 		String className = null;
 		String methodName = null;
+		int lengthParam = 0;
+		String []urlParameters;
+		
+		if (url.length > 2 ){lengthParam = url.length-2;}
+		urlParameters = new String[lengthParam];
 		
 		switch (url.length) {
+		case 5:
+			urlParameters[2] = req.getParameter(url[4]);
+		case 4:
+			urlParameters[1] = req.getParameter(url[3]);
+		case 3:
+			urlParameters[0] = req.getParameter(url[2]);
 		case 2:
 			methodName = url[1];
 		default:
@@ -71,12 +83,9 @@ public class MainServlet extends HttpServlet{
 			instance.setResp(resp);
 			
 			if(methodName != null){
-				Class[] parameter = new Class[3];
-				parameter[0] = String.class;
-				parameter[1] = String.class;
-				parameter[2] = String.class;
+				Class[] parameter = geraParametros(lengthParam);
 				method = classe.getDeclaredMethod(methodName, parameter);
-				method.invoke(instance,new String("Sera"),new String("Legiao Urbana"),new String("tire suas maos de mim que eu nao pertenco a voce"));
+				method.invoke(instance,urlParameters);
 			}//fim do if
 			
 
@@ -134,5 +143,13 @@ public class MainServlet extends HttpServlet{
 
 		return result;
 	}//fim de urlBreaker
+	
+	public Class[] geraParametros(int valor){
+		Class[] result = new Class[valor];
+		for (int i = 0; i < valor; i++) {
+			result[i] = String.class;
+		}
+		return result;
+	}//fim de geraParametros
 	
 }//fim da classe MainServlet

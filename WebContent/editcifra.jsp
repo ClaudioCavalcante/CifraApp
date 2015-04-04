@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${requestScope.title}</title>
+<title>Insert title here</title>
 </head>
 <body>
-<form action="novaCifra/name/author/letter.do" method="post">
-  Nome da Musica:<input type="text" name="name"><br>
-  Autor: <input type="text" name="author"><br><br>
-  <textarea name=letter cols=70 rows=30>
-  </textarea><br>
-  <input type="submit">
-</form>
+
+<h3><b>${requestScope.name}</b></h3>
+<h4>${requestScope.author}</h4><br>
+
+${requestScope.letter} ${requestScope.chords}
+
+
 </body>
 </html>
