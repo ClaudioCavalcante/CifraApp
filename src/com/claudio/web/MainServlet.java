@@ -140,7 +140,6 @@ public class MainServlet extends HttpServlet{
 		for (int i = 2; i < urlSplit.length; i++) {
 			result[i - 2] = urlSplit[i];
 		}// fim do for
-
 		return result;
 	}//fim de urlBreaker
 	

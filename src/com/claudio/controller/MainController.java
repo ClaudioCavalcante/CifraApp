@@ -16,6 +16,10 @@ public abstract class MainController {
 		this.view = view;
 	}
 	
+	protected HttpServletRequest getRequest(){
+		return req;
+	}
+	
 	protected void setAttribute(String key, Object value){
 		if(req!= null){
 			req.setAttribute(key, value);

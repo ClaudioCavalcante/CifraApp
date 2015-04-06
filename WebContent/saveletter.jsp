@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<a href = "/CifraApp/Cifra/novaCifra.do">Nova Cifra</a><br><br>
-
-${requestScope.titlecifra}
-
+<h1>Acao Realizada</h1>
 </body>
 </html>

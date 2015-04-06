@@ -9,6 +9,6 @@
 <body>
 <h1>Index de pagina</h1>
 
-<a href = "Cifra.do">Cifras</a>
+<a href = "Cifra/listarCifras.do">Cifras</a>
 </body>
 </html>

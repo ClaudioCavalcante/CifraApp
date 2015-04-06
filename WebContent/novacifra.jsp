@@ -7,12 +7,13 @@
 <title>${requestScope.title}</title>
 </head>
 <body>
-<form action="novaCifra/name/author/letter.do" method="post">
+<form action="/CifraApp/Cifra/novaCifra/name/author/letter.do" method="post">
   Nome da Musica:<input type="text" name="name"><br>
   Autor: <input type="text" name="author"><br><br>
-  <textarea name=letter cols=70 rows=30>
-  </textarea><br>
+  Letra: <textarea name=letter cols=70 rows=30></textarea><br>
   <input type="submit">
 </form>
+
+<br><br>${requestScope.error}
 </body>
 </html>
