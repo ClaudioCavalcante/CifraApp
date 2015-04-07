@@ -7,10 +7,17 @@
 <title>${requestScope.title}</title>
 </head>
 <body>
+
+
+        
+ 
 <form action="/CifraApp/Cifra/novaCifra/name/author/letter.do" method="post">
-  Nome da Musica:<input type="text" name="name"><br>
-  Autor: <input type="text" name="author"><br><br>
-  Letra: <textarea name=letter cols=70 rows=30></textarea><br>
+	<fieldset>
+		<legend>General Information: </legend>
+		  <label>Nome da Musica:<input type="text" name="name"></label>
+		  <label>Autor: <input type="text" name="author"></label>
+		  <label>Letra: <textarea name=letter cols=70 rows=30></textarea></label>
+	</fieldset>
   <input type="submit">
 </form>
 

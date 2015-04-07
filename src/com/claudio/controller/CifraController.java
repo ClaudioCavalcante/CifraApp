@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.claudio.bean.Chord;
 import com.claudio.bean.Cifra;
+import com.claudio.bean.Cifra_Letter;
 import com.claudio.business.Chords;
 import com.claudio.business.Cifras;
 
@@ -41,6 +42,7 @@ public class CifraController extends MainController {
 				result += "<select name='" + i + "'>";
 				result += getChords();
 			}// fim do for
+			
 			result += "<input hidden type='checkbox' name='letter' value='"
 					+ letter + "' checked>";
 			result += "<input hidden type='checkbox' name='cifraID' value='"
@@ -57,22 +59,59 @@ public class CifraController extends MainController {
 		}
 
 	}// fim de novaCifra
+	
+	
+	
 
 	// ::: FUNCOES DE ACESSO A DAO (SALVAR, EXIBIR, EDITAR)
 
-	
-
+	//exibe a lista de cifras cadastradas
 	public void listarCifras() throws SQLException {
 		List<Cifra> cifrasTitle = cfr.getCifras();
 		String result = "";
 		for (int i = 0; i < cifrasTitle.size(); i++) {
-			result += "<a href='/CifraApp/editarCifra/" + i + ".do '>"
-					+ cifrasTitle.get(i).getName() + "</a> - "
-					+ cifrasTitle.get(i).getAuthor() + " <br>";
+			result += "<form action='exibirCifra/title.do' method = 'post'>"+
+			"<input hidden type='radio' name='title' value='" + cifrasTitle.get(i).getName() + "' checked>"
+			+ cifrasTitle.get(i).getName() +" - "
+			+ cifrasTitle.get(i).getAuthor() 
+			+"<input type='submit' value = 'Ver'>"+
+			"</form> <br>";
 		}// fim do for
 		setAttribute("titlecifra", result);
 	}// fim de listar cifras
 
+	//Exibe a cifra completa
+		public void exibirCifra(String cifraName) throws SQLException{
+			cifraName = cifraName.replace("%20", " ");
+			int cifraID = cfr.getCifra(cifraName).getCifraID();
+			
+			List<Cifra_Letter> cfLetter = cfr.getCifraLetter(cifraID);
+			String result = "";
+			for (int i = 0; i < cfLetter.size(); i++) {
+				if(cfLetter.get(i).getChordLetter().equals("null") || cfLetter.get(i).getChordLetter() == null){
+					result += "&nbsp; ";
+				}else{result += cfLetter.get(i).getChordLetter();}
+			} //fim do for
+			
+			result += "<br>";
+			for (int i = 0; i < cfLetter.size(); i++) {
+				result += cfLetter.get(i).getSyllable();
+			} //fim do for
+			setAttribute("cifraname", cfr.getCifra(cifraName).getName());
+			setAttribute("cifraauthor", cfr.getCifra(cifraName).getAuthor());
+			setAttribute("cifraletter", result);
+			view = "exibircifraletter";
+		}//fim de exibirCifra
+	
+	public void salvarCifra(String letter,String cifraID) throws SQLException {
+		String chordID = "";
+		for (int i = 0; i < letter.length(); i++) {
+			chordID += getRequest().getParameter("" + i);
+		}// fim do for
+		cfr.insertCifraLetter(letter, chordID, cifraID);
+		view = "saveletter";
+	}// fim de recreateLetter
+	
 	// :::: FERRAMENTAS
 
 	public void setTitle(String name, String author) throws SQLException {
@@ -112,14 +151,7 @@ public class CifraController extends MainController {
 		// setAttribute("letter", result);
 	}
 
-	public void salvarCifra(String letter,String cifraID) throws SQLException {
-		String chordID = "";
-		for (int i = 0; i < letter.length(); i++) {
-			chordID += getRequest().getParameter("" + i);
-		}// fim do for
-		cfr.insertCifraLetter(letter, chordID, cifraID);
-		view = "saveletter";
-	}// fim de recreateLetter
+	
 
 	// :::: GETVIEW
 	@Override

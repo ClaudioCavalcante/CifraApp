@@ -64,22 +64,5 @@ public class CifraDAO extends BaseDAO{
 		stmt.execute();
 	}//fim de insertCifra
 
-	public void insertCifraLetter(String letter, String chordId, int cifraId) throws SQLException {
-		// TODO Auto-generated method stub
-		int chordID = 0;
-		for (int i = 0; i < letter.length(); i++) {
-			setStatement("INSERT INTO CIFRA_LETTER (syllable, chordID, cifraID) VALUES (?,?,?)");
-			stmt.setString(1, ""+letter.charAt(i));
-			if(chordId.charAt(i) == ' ' ){
-				chordID = 0;
-			}else{
-				chordID = Integer.parseInt(""+chordId.charAt(i));
-			}
-			stmt.setInt(2, chordID);
-			stmt.setInt(3, cifraId);
-			
-			stmt.execute();
-		}
-		
-	}
+	
 }//fim da classe CifraDAO

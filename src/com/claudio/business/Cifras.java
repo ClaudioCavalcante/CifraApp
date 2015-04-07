@@ -4,11 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.claudio.bean.Cifra;
+import com.claudio.bean.Cifra_Letter;
 import com.claudio.dao.CifraDAO;
+import com.claudio.dao.Cifra_LetterDAO;
 
 public class Cifras {
 
 	private CifraDAO cifraDao = new CifraDAO();
+	private Cifra_LetterDAO cfLetterDao = new Cifra_LetterDAO();
 	
 	public List<Cifra> getCifras() throws SQLException {
 		// TODO Auto-generated method stub
@@ -42,7 +45,12 @@ public class Cifras {
 	public void insertCifraLetter(String letter, String chordID, String cifraID) throws SQLException {
 		// TODO Auto-generated method stub
 		int cifraId = Integer.parseInt(cifraID);
-		cifraDao.insertCifraLetter(letter,chordID, cifraId);
+		cfLetterDao.insertCifraLetter(letter,chordID, cifraId);
 	}
+	
+	public List<Cifra_Letter> getCifraLetter(int cifraID) throws SQLException{
+		return new Cifra_LetterDAO().getCifraLetter(cifraID);
+		
+	}//fim de getCifraLetter
 
 }//fim da classe Cifras

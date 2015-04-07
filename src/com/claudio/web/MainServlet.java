@@ -60,7 +60,7 @@ public class MainServlet extends HttpServlet{
 		case 4:
 			urlParameters[1] = req.getParameter(url[3]);
 		case 3:
-			urlParameters[0] = req.getParameter(url[2]);
+				urlParameters[0] = req.getParameter(url[2]);
 		case 2:
 			methodName = url[1];
 		default:
